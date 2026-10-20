@@ -1,49 +1,48 @@
 # Cara IQ Laboratório (Web)
 
-**Pure browser version** of Cara IQ Laboratório.
+**Pure browser version** — no Flutter, no install needed after deployment.
 
-No installation required after deployment. Just open the website and analyze your face.
+Just open the website and analyze your face.
 
-> This is an original product. Scoring, UI and logic are custom.
+> Original product. Not a copy of any commercial service.
 
-## Features
+## Features (already working)
 
 - Front + side photo upload
-- Real facial landmark detection (MediaPipe Face Landmarker in the browser)
-- Original 4-pillar scoring:
-  - Harmony (proportions)
-  - Structure (jaw & bone definition)
-  - Dimorphism
-  - Features
-- Overall score + key ratios
-- Progress tracking (saved locally in your browser)
-- Works on phone and desktop browsers
-- Clean English UI
+- Original 4-pillar scoring (Harmony, Structure, Dimorphism, Features)
+- Key facial ratios calculated from landmark geometry
+- Progress history saved in the browser
+- Clean English mobile-friendly UI
 
-## How you will use it
-
-Once deployed you only need the link. No terminal, no Flutter, no install.
-
-## Local development (optional)
+## How to run it right now (local)
 
 ```bash
+git clone https://github.com/Peddro313/cara-iq-laboratorio-web.git
+cd cara-iq-laboratorio-web
 npm install
 npm run dev
 ```
 
-## Deploy for free
+Then open the URL that appears (usually http://localhost:5173).
 
-- Vercel (recommended)
-- Netlify
-- GitHub Pages
+## How to make it a real website (no terminal for users)
 
-## Tech Stack
+1. Push this repo to GitHub (already done).
+2. Go to [vercel.com](https://vercel.com) → Import this repository → Deploy.
+3. You get a public link like `https://cara-iq-laboratorio-web.vercel.app`.
+4. Anyone can open that link on phone or computer. No install, no terminal.
 
-- Vite
-- Vanilla JavaScript (ES modules)
-- MediaPipe Face Landmarker
-- LocalStorage for history
+Same works with Netlify or GitHub Pages.
 
-## Status
+## Current limitation
 
-Building the complete web app now.
+Landmark detection still uses demo points. Next step is wiring real **MediaPipe Face Landmarker** in the browser so scores come from the actual photos.
+
+## Repositories
+
+| Version | Repo |
+|---------|------|
+| Flutter (Android + iOS + Web) | [cara-iq-laboratorio](https://github.com/Peddro313/cara-iq-laboratorio) |
+| Pure Web (this one) | [cara-iq-laboratorio-web](https://github.com/Peddro313/cara-iq-laboratorio-web) |
+
+While you install Flutter, I continue improving this web version.
