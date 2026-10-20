@@ -1,20 +1,29 @@
 # Cara IQ Laboratório (Web)
 
-**Pure browser version** — no Flutter, no install needed after deployment.
-
-Just open the website and analyze your face.
+**Pure browser version** — no install needed after deployment.
 
 > Original product. Not a copy of any commercial service.
 
-## Features (already working)
+## Features
 
 - Front + side photo upload
+- **Real MediaPipe Face Landmarker** (detects 478 facial points in the browser)
 - Original 4-pillar scoring (Harmony, Structure, Dimorphism, Features)
-- Key facial ratios calculated from landmark geometry
-- Progress history saved in the browser
+- Key facial ratios from actual landmarks
+- Progress history (saved in browser)
 - Clean English mobile-friendly UI
 
-## How to run it right now (local)
+## Deploy in 1 minute (recommended)
+
+1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
+2. Click **Add New Project**
+3. Import `Peddro313/cara-iq-laboratorio-web`
+4. Click **Deploy**
+5. You get a public link (example: `https://cara-iq-laboratorio-web.vercel.app`)
+
+Anyone can open that link on phone or computer. No terminal, no install.
+
+## Local development
 
 ```bash
 git clone https://github.com/Peddro313/cara-iq-laboratorio-web.git
@@ -23,26 +32,9 @@ npm install
 npm run dev
 ```
 
-Then open the URL that appears (usually http://localhost:5173).
-
-## How to make it a real website (no terminal for users)
-
-1. Push this repo to GitHub (already done).
-2. Go to [vercel.com](https://vercel.com) → Import this repository → Deploy.
-3. You get a public link like `https://cara-iq-laboratorio-web.vercel.app`.
-4. Anyone can open that link on phone or computer. No install, no terminal.
-
-Same works with Netlify or GitHub Pages.
-
-## Current limitation
-
-Landmark detection still uses demo points. Next step is wiring real **MediaPipe Face Landmarker** in the browser so scores come from the actual photos.
-
 ## Repositories
 
 | Version | Repo |
 |---------|------|
-| Flutter (Android + iOS + Web) | [cara-iq-laboratorio](https://github.com/Peddro313/cara-iq-laboratorio) |
 | Pure Web (this one) | [cara-iq-laboratorio-web](https://github.com/Peddro313/cara-iq-laboratorio-web) |
-
-While you install Flutter, I continue improving this web version.
+| Flutter (Android + iOS + Web) | [cara-iq-laboratorio](https://github.com/Peddro313/cara-iq-laboratorio) |
