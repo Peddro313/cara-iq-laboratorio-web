@@ -1,6 +1,7 @@
 import { analyze } from './scoring.js';
 import { computeRatios, demoLandmarks } from './landmarks.js';
 import { getAllAnalyses, getAnalysis, saveAnalysis } from './storage.js';
+import { detectLandmarks, fileToImage, initFaceLandmarker } from './mediapipe.js';
 
 const app = document.getElementById('app');
 
@@ -8,6 +9,11 @@ let frontFile = null;
 let sideFile = null;
 let frontUrl = null;
 let sideUrl = null;
+
+// Preload MediaPipe in the background
+initFaceLandmarker().catch(() => {
+  console.warn('MediaPipe preload failed – will retry on analysis');
+});
 
 // ---------- ROUTER ----------
 function navigate(path) {
@@ -132,19 +138,32 @@ function renderUpload() {
 async function runAnalysis() {
   const btn = document.getElementById('btn-analyze');
   btn.disabled = true;
-  btn.textContent = 'Analyzing…';
+  btn.textContent = 'Detecting face…';
 
-  // Simulate processing time. Later this will run real MediaPipe.
-  await new Promise((r) => setTimeout(r, 1200));
+  try {
+    // Real MediaPipe detection on the front photo
+    const frontImg = await fileToImage(frontFile);
+    let landmarks;
 
-  const landmarks = demoLandmarks();
-  const ratios = computeRatios(landmarks);
-  const result = analyze(ratios);
+    try {
+      landmarks = await detectLandmarks(frontImg);
+      btn.textContent = 'Calculating scores…';
+    } catch (err) {
+      console.warn('MediaPipe failed, using demo landmarks:', err.message);
+      landmarks = demoLandmarks();
+      btn.textContent = 'Calculating scores (demo)…';
+    }
 
-  // Keep a small reference to the photos (data URLs would be large; we just store scores for now)
-  saveAnalysis(result);
+    const ratios = computeRatios(landmarks);
+    const result = analyze(ratios);
+    saveAnalysis(result);
 
-  navigate(`/result/${result.id}`);
+    navigate(`/result/${result.id}`);
+  } catch (err) {
+    alert('Analysis failed: ' + err.message);
+    btn.disabled = false;
+    btn.textContent = 'Analyze Face';
+  }
 }
 
 function renderResult(id) {
